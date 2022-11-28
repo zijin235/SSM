@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<body>
+<h1>index.html</h1>
+<a th:href="@{/hello}">测试@RequestMapping注解所标识的位置</a><br>
+<a th:href="@{/abc}">测试value属性</a><br>
+<form th:action="@{/hello}" method="post">
+    <input type="submit" value="测试@RequestMapping注解的Method属性">
+</form>
+<a th:href="@{/aba/test/ant}">测试ant风格的路径</a><br>
+<a th:href="@{/test/rest/1}">测试values属性中的占位符</a><br>
+<hr>
+<!--<form th:action="@{/param/servletAPI}" method="post">-->
+<!--    用户名:<input type="text" name="username"><br>-->
+<!--    密码:<input type="password" name="password"><br>-->
+<!--    <input type="submit" value="登录"><br>-->
+<!--</form>-->
+<form th:action="@{/param/pojo}" method="post">
+    用户名:<input type="text" name="username"><br>
+    密码:<input type="password" name="password"><br>
+    <input type="submit" value="登录"><br>
+</form>
+<hr>
+<a th:href="@{/test/mav}">测试modelandview</a><br>
+<a th:href="@{/test/model}">测试model</a><br>
+<a th:href="@{/test/modelMap}">测试modelMap</a><br>
+<a th:href="@{/test/Map}">测试Map</a><br>
+<a th:href="@{/test/session}">测试session共享对象</a><br>
+<a th:href="@{/test/application}">测试application共享对象</a><br>
+<hr>
+<a th:href="@{/test/view/thymeleaf}">测试SpringMVC的视图ThymeleafView</a><br>
+<a th:href="@{/test/view/forward}">测试转发视图</a><br>
+<a th:href="@{/test/view/redirect}">测试重定向视图</a><br>
+</body>
+</html>

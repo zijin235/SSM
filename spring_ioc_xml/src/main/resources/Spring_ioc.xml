@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean id="StudentOne" class="spring_guigu.Student">
+        <constructor-arg name="sid" value="1002"></constructor-arg><!--字面量赋值-->
+        <constructor-arg name="sname" value="李四"></constructor-arg>
+        <constructor-arg name="age" value="24"></constructor-arg>
+        <constructor-arg name="gender" value="女"></constructor-arg>
+<!--        <constructor-arg ref="clazzOne"></constructor-arg>-->
+        <constructor-arg name="hobby">
+            <array>
+                <value>抽烟</value>
+                <value>喝酒</value>
+            </array>
+        </constructor-arg>
+    </bean>
+    <bean id="StudentTwo" class="spring_guigu.Student"><!--setter注入，通过成员变量的set方法进行赋值，name：设置需要赋值的属性名，（和set方法有关）-->
+        <property name="sid" value="1001"></property>
+        <property name="gender" >
+            <null></null>
+        </property>
+        <property name="age" value="23"></property>
+        <property name="sname" value="&lt;张三&gt;"></property>
+<!--        <property name="sname">-->
+<!--            <value><![CDATA[a < b]]></value> 利用xml的标签CDATA节来原样解析内容-->
+
+<!--        </property>-->
+    </bean>
+    <bean id="StudentThree" class="spring_guigu.Student">
+        <property name="sid" value="1004"></property>
+        <property name="sname" value="王五"></property>
+        <property name="age" value="24"></property>
+        <property name="gender" value="男"></property>
+        <!--<property name="clazz" ref="clazzOne"></property>--><!--外部引用，引用某个bean中类来为clazz赋值-->
+        <!--级联 需要先赋值或者先实例化，否则无法使用，因为class为null-->
+<!--        <property name="clazz.cid" value="202"></property>-->
+<!--        <property name="clazz.cname" value="rq202"></property>-->
+        <property name="clazz">
+            <bean id="clazzInner" class="spring_guigu.ClaSZ">
+                <!--内部级联的bean不能直接通过Ioc容器被获取-->
+                <property name="cid" value="202"></property>
+                <property name="cname" value="rq202"></property>
+            </bean>
+        </property>
+        <property name="hobby">
+            <array>
+                <value>抽烟</value>
+                <value>喝酒</value>
+                <value>烫头</value>
+            </array>
+        </property>
+        <property name="teacherMap" ref="TeacherMap">
+<!--            <map>-->
+<!--                <entry key="2012" value-ref="TeacherOne"></entry>-->
+<!--            </map>-->
+        </property>
+    </bean>
+    <bean id="clazzOne" class="spring_guigu.ClaSZ">
+        <property name="cid" value="201"></property>
+        <property name="cname" value="rq201"></property>
+        <property name="students" ref="StudentList"></property>
+<!--        <property name="students">&lt;!&ndash; 内部的list集合&ndash;&gt;-->
+<!--            <list>-->
+<!--                &lt;!&ndash;<value></value>&ndash;&gt;&lt;!&ndash;存储字面量类型 &ndash;&gt;-->
+<!--                <ref bean="StudentOne"></ref>-->
+<!--                <ref bean="StudentTwo"></ref>-->
+<!--                <ref bean="StudentThree"></ref>-->
+<!--            </list>-->
+<!--        </property>-->
+    </bean>
+    <util:list id="StudentList">
+        <ref bean="StudentOne"></ref>
+        <ref bean="StudentTwo"></ref>
+        <ref bean="StudentThree"></ref>
+    </util:list>
+    <bean id="TeacherOne" class="spring_guigu.Teacher">
+        <property name="tid" value="2012"></property>
+        <property name="tname" value="大包"></property>
+    </bean>
+    <util:map id="TeacherMap">
+        <entry key="2012" value-ref="TeacherOne"></entry>
+    </util:map>
+
+    <bean id="StudentFour" class="spring_guigu.Student" p:sid="1004" p:sname="小米" p:age="26" p:teacherMap-ref="TeacherMap"></bean>
+<!--通过bean的类型、bean所继承的类的类型、bean所实现的接口的类型都可以获取bean-->
+
+</beans>

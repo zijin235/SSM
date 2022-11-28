@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="userController" class="controller.UserController" autowire="byName">
+<!--        <property name="userService" ref="UserService"></property>-->
+    </bean>
+
+    <bean id="UserService" class="service.impl.UserServiceImpl" autowire="byName">
+<!--        <property name="userDao" ref="UserDao"></property>-->
+    </bean>
+    <bean id="Service" class="service.impl.UserServiceImpl" ></bean>
+    <bean id="userDao" class="dao.impl.UserDaoImpl"></bean>
+
+</beans>

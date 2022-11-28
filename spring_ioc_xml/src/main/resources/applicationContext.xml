@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!--        1.导入spring的坐标spring-context-->
+<!--        2.配置bean-->
+<!--    bean标签标识配置bean,将对象交给ioc管理-->
+<!--    id属性标识给bean起名字，唯一标识，不可重复-->
+<!--    class属性表示给bean定义类别-->
+    <bean id="bookDao" class="Spring_test.dao.impl.BookDaoImpl"></bean>
+    <bean id="Helloworld" class="spring_guigu.Helloworld"></bean>
+    <bean id="bookService" name="serc1" class="Spring_test.service.impl.BookServiceImpl" scope="prototype">
+<!--        配置service与dao的关系-->
+<!--        name属性相当于给bean起个别名，可以起多个别名，用逗号、分号、空格等分隔均可。-->
+        <property name="bookDao" ref="bookDao"></property>
+<!--        property表示配置当前bean的属性，name属性表示配置当前哪一个具体属性，ref表示参照哪个属性-->
+    </bean>
+</beans><!-->根标签<-->
